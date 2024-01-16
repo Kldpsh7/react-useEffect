@@ -26,8 +26,14 @@ const Login = (props) => {
   }
 
   useEffect(()=>{
-    setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length>=4)
-  },[enteredEmail,enteredPassword])
+    const identifier = setTimeout(() => {
+      setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length>=4 && enteredCollege.trim().length>0)
+    }, 500);
+    
+    return () =>{
+      clearTimeout(identifier)
+    }
+  },[enteredEmail,enteredPassword,enteredCollege])
 
   const validateEmailHandler = () => {
     setEmailIsValid(enteredEmail.includes('@'));
