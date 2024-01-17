@@ -46,15 +46,19 @@ const Login = (props) => {
   const [passwordState,dispatchPassword] = useReducer(passwordReducer,{value:'',isValid:null});
   const [collegeState,dispatchCollege] = useReducer(collegeReducer,{value:'',isValid:null});
 
+  const {isValid:emailIsValid} = emailState;
+  const {isValid:passwordIsValid} = passwordState;
+  const {isValid:collegeIsValid} = collegeState;
+
   useEffect(()=>{
     const identifier = setTimeout(() => {
-      setFormIsValid(emailState.isValid && passwordState.isValid && collegeState.isValid)
+      setFormIsValid(emailIsValid && passwordIsValid && collegeIsValid)
     }, 500);
     
     return () =>{
       clearTimeout(identifier)
     }
-  },[emailState,passwordState,collegeState])
+  },[emailIsValid,passwordIsValid,collegeIsValid])
 
   const emailChangeHandler = (event) => {
     dispatchEmail({type:'USER_INPUT',val:event.target.value});
